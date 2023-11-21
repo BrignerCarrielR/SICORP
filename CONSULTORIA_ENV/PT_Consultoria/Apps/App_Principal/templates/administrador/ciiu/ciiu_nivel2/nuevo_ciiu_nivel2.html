@@ -1,0 +1,34 @@
+{% extends 'formulario.html' %}
+{% load static %}
+
+{% block formulario %}
+
+	<div class="p-4">
+		<form>
+			<div class="col p-1">
+				<div class="col-md-4">
+					<label for="ciiuNivel2" class="form-label fw-bold">CIIU</label>
+					{{ form.ciiu }}
+				</div>
+				<div class="mb-3">
+					<label for="descripcionNivel2" class="form-label fw-bold">Descripción</label>
+					{{ form.descripcion }}
+				</div>
+
+			</div>
+			{% if form.errors %}
+				<div class="alert alert-danger alert-dismissible" role="alert">
+					<strong>Error al Grabar</strong>
+					<p class="text-white">{{ form.errors }}</p>
+					<button type="button" class="btn-close" data-bs-dismiss="alert"
+					        aria-label="Close"></button>
+				</div>
+			{% endif %}
+			<div class="container row justify-content-center">
+				<button type="submit" class="btn col-auto btn-warning rounded-pill float-end">Guardar
+				</button>
+			</div>
+		</form>
+	</div>
+
+{% endblock %}

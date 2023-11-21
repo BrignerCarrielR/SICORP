@@ -1,0 +1,35 @@
+{% extends 'formulario.html' %}
+{% load static %}
+
+{% block formulario %}
+
+	<div class="row p-4">
+		<div class="col-md-6">
+			<label for="idEntidadBancaria" class="form-label fw-bold">Empresa</label>
+			{{ form.empresa }}
+		</div>
+		<div class="col-md-6">
+			<label for="idEntidadBancaria" class="form-label fw-bold">Persona - Empleado</label>
+			{{ form.id_persona }}
+		</div>
+		<div class="col-md-6">
+			<label for="idEntidadBancaria" class="form-label fw-bold">Entidad Bancaria</label>
+			{{ form.id_endidad }}
+		</div>
+
+		{% if form.errors %}
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<strong>Error al Grabar</strong>
+				<p class="text-white">{{ form.errors }}</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+				        aria-label="Close"></button>
+			</div>
+		{% endif %}
+		<br>
+		<div class="container p-4 row justify-content-center">
+			<button type="submit" class="btn col-auto btn-warning rounded-pill float-end">Guardar
+			</button>
+		</div>
+	</div>
+
+{% endblock %}

@@ -1,0 +1,262 @@
+{% extends 'lista.html' %}
+{% load static %}
+
+{% block tabla %}
+	{#	Filtros #}
+	<form method="get">
+		<div class="col">
+			<div class="d-flex justify-content-end">
+				<div class="row me-auto">
+					<div class="col-2">
+						<input type="text" name="nombres" class="form-control" placeholder="Nombre" value=
+								"{{ request.GET.nombres }}">
+					</div>
+					<div class="col-2">
+						<input type="datetime-local" name="fecha" class="form-control" placeholder="Fecha" value=
+								"{{ request.GET.fecha_inicio }}">
+					</div>
+					<div class="col-3">
+						<select name="estado" class="form-control">
+							<option selected disabled>Seleccionar Estado</option>
+							<option>En Curso</option>
+							<option>Finalizado</option>
+						</select>
+					</div>
+					<div class="col-2">
+						<button type="submit" class="btn btn-primary rounded-pill">Buscar</button>
+					</div>
+					<div class="col-2">
+						<a type="button" href="{% url 'lista_permiso' %}"
+						   class="btn btn-secondary rounded-pill">Limpiar</a>
+					</div>
+				</div>
+				<a class="btn btn-warning rounded-pill float-end" href="{{ nuevo }}">Agregar</a>
+			</div>
+		</div>
+	</form>
+
+	<table class="table table-striped">
+		<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col">Usuario</th>
+			<th scope="col">Fecha Inicio</th>
+			<th scope="col">Fecha Fin</th>
+			<th scope="col">Estado</th>
+			<th class="text-center" scope="col">Acciones</th>
+		</tr>
+		</thead>
+		<tbody>
+		{% for object in permisos %}
+			<tr>
+				<th>{{ forloop.counter }}</th>
+				<td>{{ object.id_usuario }}</td>
+				<td>{{ object.fecha_inicio }}</td>
+				<td>{{ object.fecha_fin }}</td>
+				<td>{{ object.estado_permiso }}</td>
+				<td class="text-center">
+					<a class="btn btn-info rounded-pill" data-bs-toggle="modal" data-bs-target="#modal{{ object.id }}">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+						     class="bi bi-eye-fill" viewBox="0 0 16 16">
+							<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+							<path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+						</svg>
+					</a>
+					<a class="btn btn-success rounded-pill" href="{% url 'modificar_permiso' object.id %}">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+						     class="bi bi-pencil-square"
+						     viewBox="0 0 16 16">
+							<path
+									d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+							<path fill-rule="evenodd"
+							      d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+						</svg>
+					</a>
+					<a class="btn btn-danger rounded-pill" href="{% url 'eliminar_permiso' object.id %}">
+						<svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+						     class="bi bi-trash3-fill"
+						     viewBox="0 0 16 16">
+							<path
+									d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z"/>
+						</svg>
+					</a>
+				</td>
+			</tr>
+		{% endfor %}
+		</tbody>
+	</table>
+
+
+	<!-- !!!!!!!!!!!!!!!!!!!!!   MODAL   !!!!!!!!!!!!!!!!!!!!!   -->
+
+	{% for object in permisos %}
+		<div class="modal fade" id="modal{{ object.id }}" data-bs-backdrop="static" data-bs-keyboard="false"
+		     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+			<div class="modal-dialog modal-xl modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h3 class="fw-bold text-center">DESCRIPCIÓN DE <span class="text-warning">PERMISO</span></h3>
+						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					</div>
+					<div class="modal-body">
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th scope="col">Usuario</th>
+								<th scope="col">Fecha Inicio</th>
+								<th scope="col">Fecha Fin</th>
+								<th scope="col">Estado</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>{{ object.id_usuario }}</td>
+								<td>{{ object.fecha_inicio }}</td>
+								<td>{{ object.fecha_fin }}</td>
+								<td>{{ object.estado_permiso }}</td>
+							</tr>
+							</tbody>
+						</table>
+						<table class="table table-striped">
+							<thead>
+							<tr>
+								<th scope="col">Accesos a Módulos</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<td>
+									<div class="row">
+										<div class="col-md-3">
+											<div class="form-check">
+												{% if object.accionistas == True %}
+													<a class="btn btn-success" style="width: 100%">Accionistas</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Accionistas</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.apalancamiento == True %}
+													<a class="btn btn-success btn-detalle" style="width: 100%">Apalancamientos</a>
+												{% else %}
+													<a class="btn btn-secondary btn-detalle" style="width: 100%">Apalancamientos
+													</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.auditores == True %}
+													<a class="btn btn-success" style="width: 100%">Auditores
+													</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Auditores
+													</a>
+												{% endif %}
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-check">
+												{% if object.cargos == True %}
+													<a class="btn btn-success" style="width: 100%">Cargos</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Cargos</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.ciu == True %}
+													<a class="btn btn-success" style="width: 100%">Ciu's</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Ciu's</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.data_principal == True %}
+													<a class="btn btn-success" style="width: 100%;">Data
+														Principal</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Data Principal
+													</a>
+												{% endif %}
+											</div>
+
+										</div>
+										<div class="col-md-3">
+											<div class="form-check">
+												{% if object.con_directivo == True %}
+													<a class="btn btn-success" style="width: 100%">Directorio de
+														Gerentes
+													</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Directorio de
+														Gerentes
+													</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.entidades == True %}
+													<a class="btn btn-success" style="width: 100%">Entidades
+													</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Entidades
+													</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.impuesto_causado == True %}
+													<a class="btn btn-success" style="width: 100%">Impuesto
+														Causado-IR
+													</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Impuesto
+														Causado-IR
+													</a>
+												{% endif %}
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-check">
+												{% if object.junta == True %}
+													<a class="btn btn-success" style="width: 100%">Juntas</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Juntas</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.origen == True %}
+													<a class="btn btn-success" style="width: 100%">Origenes</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Origenes</a>
+												{% endif %}
+											</div>
+											<div class="form-check">
+												{% if object.personas == True %}
+													<a class="btn btn-success" style="width: 100%">Personas</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Personas</a>
+												{% endif %}
+											</div>
+										</div>
+										<div class="col-md-3">
+											<div class="form-check">
+												{% if object.excel == True %}
+													<a class="btn btn-success" style="width: 100%">Subir Excel</a>
+												{% else %}
+													<a class="btn btn-secondary" style="width: 100%">Subir Excel</a>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary rounded-start" data-bs-dismiss="modal">Cerrar
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	{% endfor %}
+{% endblock %}
+

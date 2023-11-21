@@ -1,0 +1,260 @@
+{% extends 'usuario/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+	<!-- Saludo -->
+	<div class="m-4">
+		<div class="h5 pb-2 mb-4 border-bottom">
+			<div class="d-flex justify-content-end">
+				<div class="col"><span class="fw-bold">¡Hola {{ request.session.nombres }}</span>, bienvenido al
+					Sistema de
+					Control de Consultoria!
+				</div>
+				<div><a href="{% url 'usuario_modulos' %}" class="btn btn-warning rounded-pill">Refrescar</a></div>
+			</div>
+		</div>
+		<div>
+			<h4 class="fw-bold">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+				     class="bi bi-grid-fill" viewBox="0 0 16 16">
+					<path
+							d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zm8 0A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm-8 8A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm8 0A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3z"/>
+				</svg>
+				Módulos
+			</h4>
+		</div>
+	</div>
+
+	<!-- contenido de la pagina -->
+	<div class="m-4">
+		<div class="row">
+			{% for det in permisos %}
+				{% if request.session.nom_user == det.id_usuario.nom_user and det.estado_permiso == 'En Curso' %}
+					{% if det.accionistas == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_lista_accionista' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/accionistas.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Accionistas</h5>
+											<p class=" text-modulos card-text">Listado de Accionistas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.apalancamiento == True %}
+						<div  class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_lista_apalancamiento' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/apalacamiento.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Apalancamiento</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.auditores == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_auditores' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/auditores.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Auditores</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.cargos == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_lista_cargo' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/cargos.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Cargos</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.ciu == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_inicio_ciiu' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/ciiu.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Ciiu</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.data_principal == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a  href="{% url 'user_data_principal' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/data_principal.png' %}"
+											     alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Data Principal</h5>
+											<p class=" text-modulos card-text">Tabla de toda la información</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.con_directivo == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a  href="{% url 'user_lista_consejo_directivo' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/dir_gerentes.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Dir. Gerentes</h5>
+											<p class=" text-modulos card-text">Gestionar el directorio</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.entidades == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_lista_entidad' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/entidades.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Entidades</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.excel == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_subir_excel' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/excel.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">EXCEL</h5>
+											<p class=" text-modulos card-text">Cargar informacio del excel</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.impuesto_causado == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a  class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/impuestos.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Imptos Causados</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.junta == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_lista_junta' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/juntas.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Juntas</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.origen == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_inicio_origen' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/origenes.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Origenes</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+					{% if det.personas == True %}
+						<div class="col-sm-3 mb-3 p-1">
+							<div class="card">
+								<a href="{% url 'user_lista_persona' %}" class="btn btn-secondary card-body">
+									<div class="row">
+										<div class="col-4 border-end  border-2">
+											<img class="img-modulos " src="{% static 'img/personas.png' %}" alt="">
+										</div>
+										<div class="col">
+											<h5 class="card-title">Personas</h5>
+											<p class=" text-modulos card-text">Listado de personas</p>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

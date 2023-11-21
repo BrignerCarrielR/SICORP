@@ -1,0 +1,297 @@
+{% extends 'usuario/user_lista.html' %}
+{% load static %}
+
+{% block tabla %}
+	{#	Filtros #}
+	<!-- *contenido de la pagina -->
+	<div class="table-responsive-xxl">
+		<table class="table table-striped table-hover">
+			<thead>
+			<tr>
+				<th scope="col">Identificación</th>
+				<th scope="col">Entidad Bancaria</th>
+				<th scope="col">Residencia</th>
+				<th scope="col">Tam. Junta</th>
+				<th scope="col">Tam. Directorio</th>
+				<th scope="col">CIIU Op.</th>
+				<th scope="col">Capital Suscrito</th>
+				<th class="col-1">Visualizar</th>
+			</tr>
+			</thead>
+			<tbody>
+
+			<tr>
+				<th scope="row">0928174911826</th>
+				<td>BIENES RAICES E INVERSIONES DE CAPITAL BRIKAPITAL S.A</td>
+				<td>Guayas - Guayaquil</td>
+				<td>2</td>
+				<td>0</td>
+				<td>N7740.02</td>
+				<td>20.490.427,00</td>
+				<td>
+					<!-- !!!!!!! VISUALIZAR !!!!!!! -->
+					<a type="button" class="btn btn-info rounded-pill" data-bs-toggle="modal"
+					   data-bs-target="#dataPrincipal">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+						     fill="currentColor" class="bi bi-eye-fill" viewBox="0 0 16 16">
+							<path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+							<path
+									d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+						</svg>
+					</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+            
+	<!-- !!!!!!!!!!!!!!!!!!!!!   MODAL   !!!!!!!!!!!!!!!!!!!!!   -->
+	<div class="modal fade" id="dataPrincipal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+	     aria-labelledby="staticBackdropLabel" aria-hidden="true">
+		<div class="modal-dialog modal-fullscreen modal-dialog-centered"> <!--modal-xl -->
+			<div class="modal-content">
+				<div class="modal-header ">
+					<h3 class="fw-bold text-center fw-bold">DETALLE - <span class="text-warning">DATA PRINCIPAL</span>
+					</h3>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="table-responsive-xxl">
+						<table class="table table-striped table-hover">
+							<!-- !DETALLE  -->
+							<h5 class="fw-bold text-center bg-primary-subtle">DETALLE ENTIDAD</h5>
+							<thead>
+							<tr>
+								<th class="col-2">Entidad Bancaria</th>
+								<th scope="col">Objeto Social</th>
+								<th class="col-1">CIIU Nivel2</th>
+								<th scope="col">Descripción CIIU Nivel 2</th>
+								<th class="col-2">Capital Autorizado</th>
+								<th class="col-2">Valor Nominal</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<th scope="row">BANCO COOPNACIONAL S.A</th>
+								<td>ACTIVIDADES DE AGENCIAS DE VIAJES, OPERADORES TURÍSTICOS, SERVICIOS DE RESERVAS Y
+									ACTIVIDADES CONEXAS.
+								</td>
+								<td>k243</td>
+								<td>ACTIVIDADES DE AGENCIAS DE VIAJES, OPERADORES TURÍSTICOS, SERVICIOS DE RESERVAS Y
+									ACTIVIDADES CONEXAS.
+								</td>
+								<td>20.490.427,00</td>
+								<td>1.000,000</td>
+							</tr>
+							</tbody>
+						</table>
+
+						<!-- ! DIRECTORIO -->
+						<div class="row m-1">
+							<h5 class="fw-bold text-center bg-primary-subtle">DIRECTORIO</h5>
+							<div class="col-sm-5 mb-3 mb-sm-0 mx-auto">
+								<table class="table table-bordered ">
+									<!-- ! DIRECTORIO HOMBRES-->
+									<thead>
+									<tr>
+										<th colspan="3" class="col bg-warning-subtle text-center">HOMBRES</th>
+									</tr>
+									<tr>
+										<th scope="col">Cédula</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Apellido</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">0943872651
+										</td>
+										<td>Ariel Carriel</td>
+										<td>Carriel</td>
+									</tr>
+									<tr>
+										<th scope="row">0985329022
+										</td>
+										<td>Daniel Santillan</td>
+										<td>Santillan</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="col-sm-5 mb-3 mb-sm-0 mx-auto">
+								<table class="table table-bordered ">
+									<!-- !DIRECTORIO MUJERES -->
+									<thead>
+									<tr>
+										<th colspan="3" class="col bg-warning-subtle text-center">MUJERES</th>
+									</tr>
+									<tr>
+										<th scope="col">Cédula</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Apellido</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">----------
+										</td>
+										<td>----------</td>
+										<td></td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- !JUNTA -->
+						<div class="row m-1">
+							<h5 class="fw-bold text-center bg-primary-subtle">JUNTA</h5>
+							<div class="col-sm-5 mb-3 mb-sm-0 mx-auto">
+								<table class="table table-bordered ">
+									<!-- !JUNTA HOMBRES -->
+									<thead>
+									<tr>
+										<th colspan="3" class="col bg-warning-subtle text-center">HOMBRES</th>
+									</tr>
+									<tr>
+										<th scope="col">Cédula</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Apellido</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">0943872651
+										</td>
+										<td>Ariel Carriel</td>
+										<td>Daniel Santillan</td>
+									</tr>
+									<tr>
+										<th scope="row">0985329022
+										</td>
+										<td>Daniel Santillan</td>
+										<td>Ariel Carriel</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="col-sm-5 mb-3 mb-sm-0 mx-auto">
+								<table class="table table-bordered ">
+									<!-- !JUNTA MUJERES -->
+									<thead>
+									<tr>
+										<th colspan="3" class="col bg-warning-subtle text-center">MUJERES</th>
+									</tr>
+									<tr>
+										<th scope="col">Cédula</th>
+										<th scope="col">Nombre</th>
+										<th scope="col">Apellido</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">----------
+										</td>
+										<td>----------</td>
+										<td>----------</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- !AUDITOR INTERNO -->
+						<div class="row m-1">
+							<h5 class="fw-bold text-center bg-primary-subtle">AUDITOR INTERNO </h5>
+							<div class="col-sm-5 mb-3 mb-sm-0 mx-auto">
+								<table class="table table-bordered ">
+									<!-- !AUDITOR INTERNO HOMBRES -->
+									<thead>
+									<tr>
+										<th colspan="3" class="col bg-warning-subtle text-center">HOMBRES</th>
+									</tr>
+									<tr>
+										<th scope="col">Empresa</th>
+										<th scope="col">Nombre</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">----------
+										</td>
+										<td>Ariel Carriel Daniel Santillan</td>
+									</tr>
+									<tr>
+										<th scope="row">----------
+										</td>
+										<td>Daniel Santillan Daniel Santillan</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="col-sm-5 mb-3 mb-sm-0 mx-auto">
+								<table class="table table-bordered ">
+									<!-- !AUDITOR INTERNO MUJERES -->
+									<thead>
+									<tr>
+										<th colspan="3" class="col bg-warning-subtle text-center">MUJERES</th>
+									</tr>
+									<tr>
+										<th scope="col">Empresa</th>
+										<th scope="col">Nombre</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">----------
+										</td>
+										<td>----------</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- !AUDITOR EXTERNO -->
+						<div class="row m-1">
+							<h5 class="fw-bold text-center bg-primary-subtle">AUDITOR EXTERNO </h5>
+							<div class="col-sm-7 mb-3 mb-sm-0 mx-auto">
+								<table class="table table-bordered ">
+									<!-- !AUDITOR EXTERNO HOMBRES -->
+									<thead>
+									<tr>
+										<th colspan="3" class="col bg-warning-subtle text-center">DETALLE</th>
+									</tr>
+									<tr>
+										<th scope="col">Empresa</th>
+										<th scope="col">Nombre Firma Auditora</th>
+										<th scope="col">Orígen</th>
+									</tr>
+									</thead>
+									<tbody>
+									<tr>
+										<th scope="row">----------
+										</td>
+										<td>MACKLIFF AUDIT Ariel Carriel Daniel Santillan</td>
+										<td>NACIONAL</td>
+									</tr>
+									<tr>
+										<th scope="row">----------
+										</td>
+										<td>Daniel Santillan Daniel Santillan</td>
+										<td>INTERNACIONAL</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary rounded-start" data-bs-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- !!!!!!!!!!!!!!!!!!!!!   MODAL FIN   !!!!!!!!!!!!!!!!!!!!!   -->
+{% endblock %}

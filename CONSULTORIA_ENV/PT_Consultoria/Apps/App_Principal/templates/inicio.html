@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+	<link rel="icon" href="{% static 'img/Icono.ico' %}">
+</head>
+
+<body style="background-color: #ecebf1;">
+
+    <!-- barra de navegaciones -->
+    <nav class="navbar navbar-altura navbar-expand-lg  navbar-fixed-top ">
+        <div class="container-fluid">
+        </div>
+    </nav>
+    <div class="navbar-fixed-top subnavbar"></div>
+
+    <!-- contenido de la pagina -->
+
+    <div class="container">
+        <div class="row p-4">
+            <div class="col p-4 border-end">
+	            <img src="{% static 'img/LOGO.png' %}" alt="">
+                <div class="border-start border-5 rounded-start border-warning">
+                    <h3 class="m-3">
+                        <span class="fw-bold">Facilitamos todos tus procesos</span> de Control de
+                        consultoria.
+                    </h3>
+                </div>
+                <div class="m-4">
+                    <h4 class="fw-bold">Administrador</h4>
+                    <div class="m-4">
+                        <img class="img-index" src="{% static 'img/control.png' %}" alt=""> <span
+                            class="fw-bold">Control</span> de
+                        todo el Sistema
+                    </div>
+                    <div class="m-4">
+                        <img class="img-index" src="{% static 'img/gestionar_usuario.png' %}" alt=""> <span
+                            class="fw-bold">Gestinar</span> Usuarios
+                    </div>
+                </div>
+                <div class="m-4">
+                    <h4 class="fw-bold">Usuario</h4>
+                    <div class="m-4">
+                        <img class="img-index" src="{% static 'img/registrar_datos.png' %}" alt=""> <span
+                            class="fw-bold">Registrar</span>
+                        Datos
+                    </div>
+                    <div class="m-4">
+                        <img class="img-index" src="{% static 'img/modificar_datos.png' %}" alt=""> <span
+                            class="fw-bold">Modificar</span>
+                        Datos
+                    </div>
+                    <div class="m-4">
+                        <img class="img-index" src="{% static 'img/eliminar_datos.png' %}" alt=""> <span
+                            class="fw-bold">Elimiar</span>
+                        Datos
+                    </div>
+                </div>
+
+            </div>
+            <div class="col m-4">
+                <div class="p-4">
+                    <h3 class="text-warning text-center fw-bold">Escoge tu rol</h3>
+                    <p class="text-center">Ingresar para iniciar sesión o registrarte</p>
+                    <div class="m-5">
+                        <div>
+                            <h5 class="fw-bold">Administrador</h5>
+                            <a class="btn btn-warning form-control rounded-pill"
+                                href="{% url 'login_admin' %}">Ingresar</a>
+                            <p style="font-size: 13px;">Ingresa si ya tienes una cuenta designada por los
+                                gestores de la página.</p>
+                        </div>
+                        <br><br>
+                        <div>
+                            <h5 class="fw-bold">Usuario</h5>
+                            <a class="btn btn-warning form-control rounded-pill"
+                                href="{% url 'login_usuario' %}">Ingresar</a>
+                            <p style="font-size: 13px;">Ingresa para registrarte o inicia sesión. Cabe aclarar que el
+                                administrador te dará permisos para acceder a ciertos
+                                módulos o a su totalidad.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {% include 'pie_pagina.html' %}
+
+
+    <script src="{% static " js/procesos.js" %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

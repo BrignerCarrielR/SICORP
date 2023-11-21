@@ -1,0 +1,74 @@
+{% extends 'usuario/user_formulario.html' %}
+{% load static %}
+
+{% block formulario %}
+
+	<div class="row p-4">
+		<div class="col-md-4">
+			<label for="Nombres" class="form-label fw-bold">NO Identificación</label>
+			{{ form.no_identificacin }}
+		</div>
+		<div class="col-md-4">
+			<label for="Nombres" class="form-label fw-bold">Nombre</label>
+			{{ form.nombre }}
+		</div>
+		<div class="col-md-4">
+			<label for="Nombres" class="form-label fw-bold">No Inscripción</label>
+			{{ form.no_inscripcion }}
+		</div>
+		<div class="col-md-4">
+			<label for="Nombres" class="form-label fw-bold">Fecha Inscripción</label>
+			{{ form.fecha_inscripcion }}
+		</div>
+		<div class="col-md-4">
+			<label for="idEntidadBancaria" class="form-label fw-bold">Estado</label>
+			{{ form.estado }}
+		</div>
+		<div class="col-md-4">
+			<label for="idEntidadBancaria" class="form-label fw-bold">Localidad - Ciudad</label>
+			{{ form.id_ciudad }}
+		</div>
+		<div class="col-md-4">
+			<label for="idEntidadBancaria" class="form-label fw-bold">Sector</label>
+			{{ form.sector }}
+		</div>
+		<div class="col-md-4">
+			<label for="idEntidadBancaria" class="form-label fw-bold">Sistema</label>
+			{{ form.sistema }}
+		</div>
+		<div class="col-md-4">
+			<label for="idEntidadBancaria" class="form-label fw-bold">CIIU Operacional</label>
+			{{ form.ciiu_operacional }}
+		</div>
+		<div class="col-md-4">
+			<label for="Activo" class="form-label fw-bold">Capital Suscrito</label>
+			{{ form.capital_suscrito }}
+		</div>
+		<div class="col-md-4">
+			<label for="Activo" class="form-label fw-bold">Capital Autorizado</label>
+			{{ form.capital_autorizado }}
+		</div>
+		<div class="col-md-4">
+			<label for="Activo" class="form-label fw-bold">Valor Nominal Acciones</label>
+			{{ form.valor_nominal }}
+		</div>
+		<div class="col-md-12">
+			<label for="descripcion" class="form-label fw-bold">Objeto Social</label>
+			{{ form.objeto_social }}
+		</div>
+		{% if form.errors %}
+			<div class="alert alert-danger alert-dismissible" role="alert">
+				<strong>Error al Grabar</strong>
+				<p class="text-white">{{ form.errors }}</p>
+				<button type="button" class="btn-close" data-bs-dismiss="alert"
+				        aria-label="Close"></button>
+			</div>
+		{% endif %}
+		<br>
+		<div class="container p-4 row justify-content-center">
+			<button type="submit" class="btn col-auto btn-warning rounded-pill float-end">Guardar
+			</button>
+		</div>
+	</div>
+
+{% endblock %}

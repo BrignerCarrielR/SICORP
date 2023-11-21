@@ -1,0 +1,197 @@
+{% extends 'usuario/base.html' %}
+{% load static %}
+
+{% block contenido %}
+
+	<div class="m-4">
+		<div class="h5 pb-2 mb-4 border-bottom">
+			<div class="d-flex justify-content-end">
+				<div class="col-auto me-auto">Bienvenido al módulo de <span class="fw-bold">{{ titulo }}</span></div>
+				<div><a href="{{ volver }}" class="btn btn-warning rounded-pill">Volver</a></div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row p-4">
+			<div class="card col-8 mx-auto">
+				<h1 class="fw-bold text-center pb-2 mb-auto border-bottom">Subir
+					<span class="text-warning">Excel</span></h1>
+				<div class="box">
+					<!-- Formulario -->
+					<div class="col p-1 input-bx">
+						<form class="row g-3 needs-validation" novalidate>
+							<div class="col-md-12">
+								<input type="file" class="form-control" id="upload" accept="" hidden required>
+								<label for="upload" class="uploadlabel form-label fw-bold">
+                                    <span>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="70" height="70"
+                                             fill="currentColor" class="bi bi-cloud-arrow-up-fill" viewBox="0 0 16 16">
+                                            <path d="M8 2a5.53 5.53 0 0 0-3.594 1.342c-.766.66-1.321 1.52-1.464 2.383C1.266 6.095 0 7.555 0 9.318 0 11.366 1.708 13 3.781 13h8.906C14.502 13 16 11.57 16 9.773c0-1.636-1.242-2.969-2.834-3.194C12.923 3.999 10.69 2 8 2zm2.354 5.146a.5.5 0 0 1-.708.708L8.5 6.707V10.5a.5.5 0 0 1-1 0V6.707L6.354 7.854a.5.5 0 1 1-.708-.708l2-2a.5.5 0 0 1 .708 0l2 2z"/>
+                                        </svg>
+                                    </span>
+									<p>Haga clic para subir</p>
+								</label>
+								<div id="filewrapper" class="container mt-3">
+									<h5 class="uploaded fw-bold text-muted mb-3">Documentos cargados</h5>
+									<!-- <div class="showfilebox">
+                                        <div class="left">
+                                            <span class="filetype">Excel</span>
+                                            <h3>Ravi Web.pdf</h3>
+                                        </div>
+                                        <div class="right">
+                                            <span>&#215;</span>
+                                        </div>
+                                    </div>-->
+								</div>
+							</div>
+							<div class="p-4 container row justify-content-center">
+								<a class="btn col-auto btn-warning rounded-pill float-end"
+								   href="#">Guardar</a>
+							</div>
+
+						</form>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<style>
+        /* !Subir Archivo Excel */
+        .uploadlabel {
+            width: 100%;
+            min-height: 100px;
+            background: #18a7ff0d;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 3px dashed #18a7ff82;
+            cursor: pointer;
+        }
+
+        .uploadlabel svg {
+            color: #18a7ff;
+        }
+
+        .uploadlabel p {
+            font-size: 20px;
+            color: #18a7ff;
+        }
+
+        .showfilebox {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 10px 0;
+            padding: 10px 15px;
+            box-shadow: #000000ed 0px 0px 0px 1px,
+            #d1d5db3d 0px 0px 0px 1px inset;
+        }
+
+        .showfilebox .left {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filetype {
+            background: #18a7ff;
+            color: #fff;
+            padding: 5px 15px;
+            font-size: 20px;
+            text-transform: capitalize;
+            font-weight: 700;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+        }
+
+        .right span {
+            background: #18a7ff;
+            color: #fff;
+            width: 25px;
+            height: 25px;
+            font-size: 25px;
+            line-height: 25px;
+            display: inline-block;
+            text-align: center;
+            font-weight: 700;
+            cursor: pointer;
+            border-radius: 50%;
+            -webkit-border-radius: 50%;
+            -moz-border-radius: 50%;
+            -ms-border-radius: 50%;
+            -o-border-radius: 50%;
+        }
+	</style>
+
+	<script>
+        function validarExt() {
+            var archivoInput = document.getElementById('upload');
+            var archivoRuta = archivoInput.value;
+            var extPermitidas = /(.xlsx)$/i;
+            if (!extPermitidas.exec(archivoRuta)) {
+                alert('Asegurate de haber seleccionado un Archivo Excel');
+                archivoInput.value = '';
+                return false;
+            }
+        }
+
+
+        window.addEventListener("load", () => {
+            const input = document.getElementById("upload");
+            const filewrapper = document.getElementById("filewrapper");
+            let currentFileBox = null; // Almacena la referencia al archivo actual
+
+            input.addEventListener("change", (e) => {
+                const files = e.target.files;
+                if (currentFileBox) {
+                    filewrapper.removeChild(currentFileBox);
+                    currentFileBox = null;
+                }
+                const file = files[0]; // Obtiene el primer archivo seleccionado
+                if (file) {
+                    let fileName = file.name;
+                    let filetype = fileName.split(".").pop();
+                    fileshow(fileName, filetype);
+                }
+            });
+
+            const fileshow = (fileName, filetype) => {
+                const showfileboxElem = document.createElement("div");
+                showfileboxElem.classList.add("showfilebox");
+                const leftElem = document.createElement("div");
+                leftElem.classList.add("left");
+                const fileTypeElem = document.createElement("span");
+                fileTypeElem.classList.add("filetype");
+                fileTypeElem.innerHTML = filetype;
+                leftElem.append(fileTypeElem);
+                const filetitleElem = document.createElement("b");
+                filetitleElem.innerHTML = fileName;
+                leftElem.append(filetitleElem);
+                showfileboxElem.append(leftElem);
+                const rightElem = document.createElement("div");
+                rightElem.classList.add("right");
+                showfileboxElem.append(rightElem);
+                const crossElem = document.createElement("span");
+                crossElem.innerHTML = "&#215;";
+                rightElem.append(crossElem);
+                filewrapper.append(showfileboxElem);
+
+                crossElem.addEventListener("click", () => {
+                    filewrapper.removeChild(showfileboxElem);
+                    currentFileBox = null; // Se establece como nulo al eliminar el archivo
+                });
+
+                currentFileBox = showfileboxElem; // Establece el archivo actual como el mostrado
+            };
+        });
+	</script>
+{% endblock %}
+

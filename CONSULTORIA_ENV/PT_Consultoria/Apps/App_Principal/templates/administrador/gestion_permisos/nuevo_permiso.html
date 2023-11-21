@@ -1,0 +1,130 @@
+{% extends 'formulario.html' %}
+{% load static %}
+
+{% block formulario %}
+
+	<div class="row">
+		<div class="col p-4 border-end">
+			<!-- Lista de usuarios -->
+			<h2 class="fw-bold">Usuarios Permitidos</h2>
+			<table class="table">
+				<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Nombres</th>
+					<th scope="col">Telefono</th>
+					<th scope="col">Correo</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for user in usuarios %}
+					<tr>
+						<th>{{ forloop.counter }}</th>
+						<td scope="col">{{ user.nombres }} {{ user.apellidos }}</td>
+						<td scope="col">{{ user.telefono }}</td>
+						<td scope="col">{{ user.correo }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div class="col p-4">
+			<!-- Formulario de asignación de permisos -->
+			<h2 class="fw-bold">Permisos</h2>
+			<form>
+				<div class="mb-3">
+					<label for="userSelect" class="form-label">Seleccionar Usuario</label>
+					{{ form.id_usuario }}
+				</div>
+				<div class="mb-3">
+					<div class="row">
+						<div class="col-md-6">
+							<label for="fechaInicio" class="form-label">Fecha de Inicio</label>
+							{{ form.fecha_inicio }}
+						</div>
+						<div class="col-md-6">
+							<label for="fechaFin" class="form-label">Fecha de Fin</label>
+							{{ form.fecha_fin }}
+						</div>
+					</div>
+				</div>
+				<div class="mb-3">
+					<label class="form-label">Accesos a Módulos</label>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="form-check">
+								{{ form.data_principal }}
+								<label class="form-check-label" for="modulo1">Data Principal</label>
+							</div>
+							<div class="form-check">
+								{{ form.con_directivo }}
+								<label class="form-check-label" for="modulo2">Directorio de Gerentes</label>
+							</div>
+							<div class="form-check">
+								{{ form.personas }}
+								<label class="form-check-label">Personas</label>
+							</div>
+							<div class="form-check">
+								{{ form.accionistas }}
+								<label class="form-check-label" for="modulo3">Accionistas</label>
+							</div>
+							<div class="form-check">
+								{{ form.junta }}
+								<label class="form-check-label" for="modulo4">Juntas</label>
+							</div>
+							<div class="form-check">
+								{{ form.apalancamiento }}
+								<label class="form-check-label" for="modulo4">Apalancamientos</label>
+							</div>
+							<div class="form-check">
+								{{ form.excel }}
+								<label class="form-check-label" for="modulo4">Subir Excel</label>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="form-check">
+								{{ form.cargos }}
+								<label class="form-check-label" for="modulo3">Cargos</label>
+							</div>
+							<div class="form-check">
+								{{ form.origen }}
+								<label class="form-check-label" for="modulo4">Origenes</label>
+							</div>
+							<div class="form-check">
+								{{ form.impuesto_causado }}
+								<label class="form-check-label" for="modulo4">Impuesto Causado-IR</label>
+							</div>
+							<div class="form-check">
+								{{ form.entidades }}
+								<label class="form-check-label" for="modulo3">Entidades</label>
+							</div>
+							<div class="form-check">
+								{{ form.auditores }}
+								<label class="form-check-label" for="modulo3">Auditores</label>
+							</div>
+							<div class="form-check">
+								{{ form.ciu }}
+								<label class="form-check-label" for="modulo3">Ciu's</label>
+							</div>
+							<!-- Agrega más módulos aquí -->
+						</div>
+					</div>
+				</div>
+				{% if form.errors %}
+					<div class="alert alert-danger alert-dismissible" role="alert">
+						<strong>Error al Grabar</strong>
+						<p class="text-white">{{ form.errors }}</p>
+						<button type="button" class="btn-close" data-bs-dismiss="alert"
+						        aria-label="Close"></button>
+					</div>
+				{% endif %}
+				<div class="container row justify-content-center">
+					<button type="submit" class="btn col-auto btn-warning rounded-pill float-end">Guardar
+						Permisos
+					</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+{% endblock %}

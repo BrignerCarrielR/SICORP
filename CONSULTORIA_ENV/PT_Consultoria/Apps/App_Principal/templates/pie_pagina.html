@@ -1,0 +1,36 @@
+<!-- Pie de pagina -->
+<footer class="text-center fixed-bottom text-lg-start footer">
+    <section class="d-flex justify-content-center justify-content-lg-between p-1">
+        <div class="container  ">
+            <div class="row">
+                <div class="col-11 text-center">
+                    <span class="fw-bold">Universidad Estatal de Milagro</span> - Todos los derechos Reservados -
+                    (Carriel - Santillan)
+                </div>
+                <div class="col">
+                    <div>
+                        <h5 class="fw-bold" id="reloj"></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</footer>
+<script>
+    function ActualizarReloj() {
+        const now = new Date();
+        let hora = now.getHours();
+        const ampm = hora >= 12 ? 'PM' : 'AM';
+        hora = hora % 12 || 12;  // Convertir a formato de 12 horas
+        const minutos = now.getMinutes().toString().padStart(2, '0');
+        const tiempo_string = `${hora}:${minutos} ${ampm}`;
+
+        document.getElementById('reloj').textContent = tiempo_string;
+    }
+
+    // Actualizar el reloj cada segundo
+    setInterval(ActualizarReloj, 1000);
+
+    // Inicializar el reloj
+    ActualizarReloj();
+</script>

@@ -1,0 +1,26 @@
+{% extends 'administrador/base.html' %}
+{% load static %}
+{% block contenido %}
+	{% if request.session.nombres %}
+		<div class="m-4">
+			<div class="h5 pb-2 mb-4 border-bottom">
+				<div class="d-flex justify-content-end">
+					<div class="col-auto me-auto">Bienvenido al módulo de <span class="fw-bold">{{ titulo }}</span></div>
+					<div><a href="{{ volver }}" class="btn btn-warning rounded-pill">Volver</a></div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="row p-4">
+				<div class="card">
+					<div class="h5 pb-2 mb-4 border-bottom">
+						<h1 class="fw-bold text-center">Control de <span class="text-warning">{{ titulo }}</span></h1>
+					</div>
+					{% block tabla %}
+
+					{% endblock %}
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endblock %}

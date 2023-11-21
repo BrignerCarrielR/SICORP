@@ -1,0 +1,69 @@
+{% load static %}
+{% if request.session.nom_user %}
+	<nav class="navbar navbar-expand-lg  navbar-fixed-top ">
+		<div class="container-fluid">
+			<a class="navbar-brand fw-bold text-white">Cunsoltoria</a>
+
+			<button class="navbar-toggler bg-secondary" type="button" data-bs-toggle="collapse"
+			        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+			        aria-expanded="false"
+			        aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+					<li class="nav-item">
+						<a class="nav-link active text-white" aria-current="page" href="#">Inicio</a>
+					</li>
+				</ul>
+				<form class="d-flex" role="search">
+					<div class="dropdown">
+
+						<a class="btn btn-secondary" href="#" role="button" data-bs-toggle="dropdown"
+						   aria-expanded="false">
+							{{ rol }}: {{ request.session.nombres }}
+						</a>
+						<ul class="dropdown-menu dropdown-menu-lg-end">
+							<li>
+								<a class="dropdown-item fw-bold">{{ request.session.nombres }}
+									<br>
+									<p class="fst-italic">{{ request.session.correo }}</p>
+								</a>
+							</li>
+							<li>
+								<hr class="dropdown-divider">
+							</li>
+							<li><a class="dropdown-item" href="#">Editar Perfil</a></li>
+							<li><a class="dropdown-item" href="{% url 'cerrarsecion_user' %}">Cerrar Sesion</a>
+							</li>
+
+						</ul>
+					</div>
+				</form>
+			</div>
+		</div>
+	</nav>
+	<div class="navbar-fixed-top subnavbar"></div>
+{% else %}
+	<div class="m-4 row justify-content-center align-items-center" style="height: 90vh;">
+
+		<div class="card mb-3" style="max-width: 540px;">
+			<div class="row g-0">
+				<div class="col-md-4">
+					<img src="{% static 'img/restringuido.png' %}" class="img-fluid rounded-start" alt="...">
+				</div>
+				<div class="col-md-8">
+					<div class="card-body">
+						<h5 class="card-title">Por favor Inicia Secion para Continuar</h5>
+						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+							additional
+							content. This content is a little bit longer.</p>
+						<p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+						<a href="{{ voler_login }}" class="btn btn-warning rounded-pill">Volver al login</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endif %}

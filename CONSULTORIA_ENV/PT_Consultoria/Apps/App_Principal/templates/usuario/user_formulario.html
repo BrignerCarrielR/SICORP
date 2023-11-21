@@ -1,0 +1,30 @@
+{% extends 'usuario/base.html' %}
+{% load static %}
+{% block contenido %}
+	{% if request.session.nombres %}
+		<div class="m-4">
+			<div class="h5 pb-2 mb-4 border-bottom">
+				<div class="d-flex justify-content-end">
+					<div class="col-auto me-auto">Bienvenido al módulo de <span class="fw-bold">{{ titulo }}</span></div>
+					<div><a href="{{ volver }}" class="btn btn-warning rounded-pill">Volver</a></div>
+				</div>
+			</div>
+		</div>
+		<form method="post" action="{{ action_save }}" enctype="multipart/form-data">
+			<input type="hidden" name="action" value="{{ action }}">
+			{% csrf_token %}
+			<div class="container">
+				<div class="row p-0">
+					<div class="card">
+						<h1 class="fw-bold text-center pb-2 mb-auto border-bottom">{{ crud }} <span
+								class="text-warning">{{ titulo }}</span></h1>
+						{% block formulario %}
+
+						{% endblock %}
+					</div>
+				</div>
+			</div>
+			<br><br>
+		</form>
+	{% endif %}
+{% endblock %}
